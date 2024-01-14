@@ -6,7 +6,7 @@ session_start();
 
 $current_user = $_SESSION['current_user'];
 $carrello = Cart::Find($current_user->GetID());
-$prodotti = $carrello-> FetchAllProducts();
+$prodotti = $carrello->FetchAllProducts();
 ?>
 
 <html>
@@ -18,11 +18,13 @@ $prodotti = $carrello-> FetchAllProducts();
 
 <?php include '../navbar.php'; ?>
 <a href="../products/index.php">Vai ai prodotti</a>
-<?php if($carrello) : ?>
+<?php if ($carrello) : ?>
     <h1>Carrello</h1>
     <ul>
         <ul>
-            <?php foreach ($prodotti as $productInCart) : ?>
+            <?php foreach ($prodotti
+
+            as $productInCart) : ?>
             <?php if ($productInCart['quantita'] != 0) { ?>
             <?php $prodotto = Product::Find($productInCart['product_id']); ?>
             <li><?php echo $prodotto->getMarca(); ?></li>
@@ -40,26 +42,26 @@ $prodotti = $carrello-> FetchAllProducts();
         </form>
 
 
-            <form action="../../actions/edit_cart.php" method="POST">
-                <input type="hidden" name="product_id" value="<?php echo $prodotto->getId(); ?>">
-                <input type="hidden" name="quantita" value="0">
-                <input type="submit" name="remove" value="Rimuovi dal carrello">
-            </form>
-            <hr>
-            <?php } ?>
-            <?php endforeach; ?>
+        <form action="../../actions/edit_cart.php" method="POST">
+            <input type="hidden" name="product_id" value="<?php echo $prodotto->getId(); ?>">
+            <input type="hidden" name="quantita" value="0">
+            <input type="submit" name="remove" value="Rimuovi dal carrello">
+        </form>
+        <hr>
+        <?php } ?>
+        <?php endforeach; ?>
     </ul>
 
-<p>Totale carrello: <?php echo $carrello->getTotalPrice(); ?></p>
+    <p>Totale carrello: <?php echo $carrello->getTotalPrice(); ?></p>
 
-<form action="../../actions/edit_cart.php" method="POST">
-    <input type="number" name="quantita" value="<?php echo $carrello->getQuantita(); ?>">
-    <input type="hidden" name="id" value="<?php echo $carrello->getId(); ?>">
-    <input type="submit" value="Compra">
-</form>
+    <form action="../../actions/edit_cart.php" method="POST">
+        <input type="number" name="quantita" value="<?php echo $carrello->getQuantita(); ?>">
+        <input type="hidden" name="id" value="<?php echo $carrello->getId(); ?>">
+        <input type="submit" value="Compra">
+    </form>
 
 <?php else : ?>
-<p>Il carrello è vuoto.</p>
+    <p>Il carrello è vuoto.</p>
 <?php endif ?>
 
 </body>

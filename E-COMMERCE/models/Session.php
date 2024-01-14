@@ -1,8 +1,11 @@
 <?php
+
 class Session
 {
     private $id;
+
     private $ip;
+
     private $data_login;
 
     public function getId()
@@ -40,8 +43,6 @@ class Session
         if (!$stmt->execute()) {
             throw new PDOException("errore di cancellazione del record di sessione richiesto");
         }
-
-
     }
 
     public static function Find($id)
@@ -54,9 +55,7 @@ class Session
         } else {
             return false;
         }
-
     }
-
 
     public static function Create($params)
     {
@@ -64,7 +63,7 @@ class Session
         $stmt = $pdo->prepare("insert into ecommerce.sessions (ip, data_login,user_id) values (:ip,:data_login,:user_id)");
         $stmt->bindParam(":ip", $params["ip"]);
         $stmt->bindParam(":data_login", $params["data_login"]);
-        $stmt->bindParam(":user_id",$params["user_id"]);
+        $stmt->bindParam(":user_id", $params["user_id"]);
         if ($stmt->execute()) {
             $stmt = $pdo->prepare("select * from ecommerce.sessions order by id desc limit 1");
             $stmt->execute();
@@ -72,12 +71,12 @@ class Session
         } else {
             throw new PDOException("Errore Nella Creazione");
         }
-
     }
 
     public static function Connect()
     {
         return DbManager::Connect("ecommerce");
     }
-
 }
+
+?>

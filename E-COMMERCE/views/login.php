@@ -8,8 +8,8 @@
     <title>LOGIN</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e3e0e6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e6f7ff;
             margin: 0;
             padding: 0;
             display: flex;
@@ -19,10 +19,11 @@
         }
 
         form {
-            background-color: #fff;
+            background-color: #ffffff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
         }
 
         input {
@@ -30,18 +31,29 @@
             padding: 10px;
             margin: 8px 0;
             box-sizing: border-box;
-            border: 1px solid #ccc;
+            border: 1px solid #66b3ff;
             border-radius: 4px;
         }
 
+        input[type="email"],
+        input[type="password"],
+        input[type="password-confirmation"] {
+            background-color: #f2f2f2;
+        }
+
         input[type="submit"] {
-            background-color: #3d85c6;
+            background-color: #4caf50;
             color: #fff;
             cursor: pointer;
         }
 
         input[type="submit"]:hover {
             background-color: #45a049;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
         }
     </style>
 </head>

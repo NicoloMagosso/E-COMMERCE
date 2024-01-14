@@ -7,8 +7,6 @@ class Cart
 
     private $user_id;
 
-
-
     public function getId()
     {
         return $this->id;
@@ -19,22 +17,18 @@ class Cart
         return $this->user_id;
     }
 
-
     public static function Create($current_UserID)
     {
         $pdo = self::Connect();
         $stmt = $pdo->prepare("INSERT INTO ecommerce.carts (user_id) VALUES (:user_id)");
-        $stmt->bindParam(":user_id",$current_UserID);
-        if($stmt->execute())
-        {
+        $stmt->bindParam(":user_id", $current_UserID);
+        if ($stmt->execute()) {
             $stmt = $pdo->prepare("select * from ecommerce.carts where user_id=:user_id");
             $stmt->bindParam("user_id", $current_UserID);
             $stmt->execute();
             $cart = $stmt->fetchObject("Cart");
             return $cart;
-        }
-        else
-        {
+        } else {
             throw new PDOException("Errore");
         }
     }
@@ -73,6 +67,7 @@ class Cart
             return false;
         }
     }
+
     public function removeProduct($product_id)
     {
         $pdo = self::Connect();
@@ -109,6 +104,7 @@ class Cart
 
         return $totale;
     }
+
     public static function Find($user_id)
     {
         $pdo = self::Connect();
@@ -119,30 +115,6 @@ class Cart
         } else {
             return false;
         }
-    }
-
-    public static function last_record()
-    {
-        $pdo = self::connect();
-        $stmt = $pdo->prepare("SELECT id FROM ecommerce.carts ORDER BY id DESC LIMIT 1");
-
-        if ($stmt->execute()) {
-            $result = $stmt->fetchObject('Cart');
-            return $result->getId();
-        } else {
-            throw new PDOException("Errore nel last_record");
-        }
-    }
-
-
-
-    public static function Find_by_product($product_id)
-    {
-        $pdo = self::connect();
-        $stmt = $pdo->prepare("select cart_id from ecommerce.cart_products where product_id =:product_id");
-        $stmt->bindParam(":product_id", $product_id);
-        $stmt->execute();
-        return $stmt->fetchObject('Cart');
     }
 
     public static function FetchAll($current_user)
@@ -160,3 +132,5 @@ class Cart
         return DbManager::Connect("ecommerce");
     }
 }
+
+?>

@@ -4,7 +4,7 @@ require '../models/Classes.php';
 
 session_start();
 $email = $_POST["email"];
-$password = hash('sha256',$_POST["password"]);
+$password = hash('sha256', $_POST["password"]);
 
 $pdo = DbManager::Connect("ecommerce");
 
@@ -24,5 +24,4 @@ if (!$user) {
     header('location:../views/products/index.php');
     exit;
 }
-
 ?>

@@ -1,10 +1,15 @@
 <?php
+
 class User
 {
     private $id;
+
     private $email;
+
     private $password;
+
     private $role_id;
+
     private $session_id;
 
     public function GetID()
@@ -69,10 +74,10 @@ class User
         }
     }
 
-
     public static function Connect()
     {
         return DbManager::Connect("ecommerce");
     }
-
 }
+
+?>

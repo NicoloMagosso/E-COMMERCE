@@ -22,8 +22,7 @@ $stmt->execute();
 
 $user = $stmt->fetchObject("User");
 
-if (!$user)
-{
+if (!$user) {
     $params = ['email' => $email, 'password' => $password];
     $user = User::Create($params);
 
@@ -36,13 +35,9 @@ if (!$user)
         exit();
     }
 
-}else
-{
+} else {
     header('Location:../views/signup.php');
     exit();
-
 }
-
-
 ?>
 

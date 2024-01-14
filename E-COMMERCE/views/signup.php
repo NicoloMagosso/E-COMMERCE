@@ -8,8 +8,8 @@
     <title>SIGN UP</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e6f7ff;
             margin: 0;
             padding: 0;
             display: flex;
@@ -19,7 +19,7 @@
         }
 
         form {
-            background-color: #fff;
+            background-color: #ffffff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -31,8 +31,14 @@
             padding: 10px;
             margin: 8px 0;
             box-sizing: border-box;
-            border: 1px solid #ccc;
+            border: 1px solid #66b3ff;
             border-radius: 4px;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="password-confirmation"] {
+            background-color: #f2f2f2;
         }
 
         input[type="submit"] {
@@ -47,18 +53,30 @@
 
         h2 {
             text-align: center;
+            color: #007bff;
         }
     </style>
 </head>
 
 <body>
-<form action="../actions/signup.php" method="post">
-    <h2>Sign Up</h2>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="password" name="password-confirmation" placeholder="Conferma Password" required>
-    <input type="submit" value="Invio">
-</form>
+<table>
+    <tr>
+        <td>
+            <form action="../actions/signup.php" method="post">
+                <h2>Sign Up</h2>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="password-confirmation" placeholder="Conferma Password" required>
+                <input type="submit" value="Invio">
+            </form>
+        </td>
+    <tr>
+        <td>
+            <p style="text-align: center; margin-top: 10px;">
+                Se sei già iscritto <a href="../views/login.php";>clicca qui!</a>.
+            </p>
+        </td>
+
 </body>
 
 </html>

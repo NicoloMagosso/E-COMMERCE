@@ -1,11 +1,14 @@
 <?php
+
 class Product
 {
     private $id;
-    private $nome;
-    private $prezzo;
-    private $marca;
 
+    private $nome;
+
+    private $prezzo;
+
+    private $marca;
 
     public function getId()
     {
@@ -82,6 +85,5 @@ class Product
     {
         return DbManager::Connect("ecommerce");
     }
-
-
 }
+?>

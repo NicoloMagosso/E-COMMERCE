@@ -12,37 +12,37 @@ class User
 
     private $session_id;
 
-    public function GetID()
+    public function getID()
     {
         return $this->id;
     }
 
-    public function SetEmail($email)
+    public function setEmail($email)
     {
         $this->id = $email;
     }
 
-    public function GetEmail()
+    public function getEmail()
     {
         return $this->email;
     }
 
-    public function SetPassword($password)
+    public function setPassword($password)
     {
         $this->password = $password;
     }
 
-    public function GetPassword()
+    public function getPassword()
     {
         return $this->id;
     }
 
-    public function GetRole_ID()
+    public function getRole_ID()
     {
         return $this->role_id;
     }
 
-    public function GetSession_ID()
+    public function getSession_ID()
     {
         return $this->session_id;
     }

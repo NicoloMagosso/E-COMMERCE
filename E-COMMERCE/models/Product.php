@@ -86,4 +86,5 @@ class Product
         return DbManager::Connect("ecommerce");
     }
 }
+
 ?>

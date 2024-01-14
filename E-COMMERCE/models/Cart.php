@@ -20,7 +20,7 @@ class Cart
     public static function Create($current_UserID)
     {
         $pdo = self::Connect();
-        $stmt = $pdo->prepare("INSERT INTO ecommerce.carts (user_id) VALUES (:user_id)");
+        $stmt = $pdo->prepare("insert into ecommerce.carts (user_id) values (:user_id)");
         $stmt->bindParam(":user_id", $current_UserID);
         if ($stmt->execute()) {
             $stmt = $pdo->prepare("select * from ecommerce.carts where user_id=:user_id");
@@ -37,7 +37,7 @@ class Cart
     {
         $pdo = self::Connect();
         $cartId = $this->getId();
-        $stmt = $pdo->prepare("INSERT INTO ecommerce.cart_products (cart_id, product_id, quantita) VALUES (:cart_id, :product_id, :quantita)");
+        $stmt = $pdo->prepare("insert into ecommerce.cart_products (cart_id, product_id, quantita) values (:cart_id, :product_id, :quantita)");
         $stmt->bindParam(':cart_id', $cartId);
         $stmt->bindParam(':product_id', $params['product_id']);
         $stmt->bindParam(':quantita', $params['quantita']);
@@ -53,7 +53,7 @@ class Cart
     {
         $pdo = self::Connect();
         $cartId = $this->getId();
-        $stmt = $pdo->prepare("UPDATE ecommerce.cart_products SET quantita = :quantita WHERE cart_id = :cart_id AND product_id = :product_id");
+        $stmt = $pdo->prepare("update ecommerce.cart_products set quantita = :quantita where cart_id = :cart_id and product_id = :product_id");
         $stmt->bindParam(':cart_id', $cartId);
         $stmt->bindParam(':product_id', $params['product_id']);
         $stmt->bindParam(':quantita', $params['quantita']);
@@ -72,7 +72,7 @@ class Cart
     {
         $pdo = self::Connect();
         $cartId = $this->getId();
-        $stmt = $pdo->prepare("DELETE FROM ecommerce.cart_products WHERE cart_id = :cart_id AND product_id = :product_id");
+        $stmt = $pdo->prepare("delete from ecommerce.cart_products where cart_id = :cart_id and product_id = :product_id");
         $stmt->bindParam(':cart_id', $cartId);
         $stmt->bindParam(':product_id', $product_id);
 
@@ -87,7 +87,7 @@ class Cart
     {
         $pdo = self::Connect();
         $cartId = $this->getId();
-        $stmt = $pdo->prepare("SELECT product_id, quantita FROM ecommerce.cart_products WHERE cart_id = :cart_id");
+        $stmt = $pdo->prepare("select product_id, quantita from ecommerce.cart_products where cart_id = :cart_id");
         $stmt->bindParam(':cart_id', $cartId);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -95,14 +95,14 @@ class Cart
 
     public function getTotalPrice()
     {
-        $totale = 0;
+        $tot = 0;
 
-        foreach ($this->FetchAllProducts() as $prodottoNelcarrello) {
-            $product = Product::Find($prodottoNelcarrello['product_id']);
-            $totale += $prodottoNelcarrello['quantita'] * $product->getPrezzo();
+        foreach ($this->FetchAllProducts() as $pCart) {
+            $product = Product::Find($pCart['product_id']);
+            $tot += $pCart['quantita'] * $product->getPrezzo();
         }
 
-        return $totale;
+        return $tot;
     }
 
     public static function Find($user_id)
@@ -119,10 +119,10 @@ class Cart
 
     public static function FetchAll($current_user)
     {
-        $userID = $current_user->getID();
+        $userId = $current_user->getID();
         $pdo = self::Connect();
-        $stmt = $pdo->prepare("SELECT * ecommerce.carts WHERE user_id = :id");
-        $stmt->bindParam(":id", $userID);
+        $stmt = $pdo->prepare("select * ecommerce.carts where user_id = :id");
+        $stmt->bindParam(":id", $userId);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_CLASS, "Cart");
     }

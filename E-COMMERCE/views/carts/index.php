@@ -12,6 +12,7 @@ $prodotti = $carrello->FetchAllProducts();
 <html>
 <head>
     <title>Carrello</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>

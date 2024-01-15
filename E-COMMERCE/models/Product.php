@@ -60,7 +60,7 @@ class Product
     public static function Create($params)
     {
         $pdo = self::Connect();
-        $stmt = $pdo->prepare("insert into ecommerce.products (nome,prezzo,marca) values (:nome,:prezzo,:marca)");
+        $stmt = $pdo->prepare("insert into ecommerce.products (nome, prezzo, marca) values (:nome, :prezzo, :marca)");
         $stmt->bindParam(":nome", $params["nome"]);
         $stmt->bindParam(":prezzo", $params["prezzo"]);
         $stmt->bindParam(":marca", $params["marca"]);

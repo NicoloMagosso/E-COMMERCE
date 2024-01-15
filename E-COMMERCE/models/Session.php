@@ -60,7 +60,7 @@ class Session
     public static function Create($params)
     {
         $pdo = self::Connect();
-        $stmt = $pdo->prepare("insert into ecommerce.sessions (ip, data_login,user_id) values (:ip,:data_login,:user_id)");
+        $stmt = $pdo->prepare("insert into ecommerce.sessions (ip, data_login, user_id) values (:ip, :data_login, :user_id)");
         $stmt->bindParam(":ip", $params["ip"]);
         $stmt->bindParam(":data_login", $params["data_login"]);
         $stmt->bindParam(":user_id", $params["user_id"]);

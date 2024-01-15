@@ -62,7 +62,7 @@ class User
     public static function Create($params)
     {
         $pdo = self::Connect();
-        $stmt = $pdo->prepare("insert into ecommerce.users (email,password, role_id) values (:email,:password,1)");
+        $stmt = $pdo->prepare("insert into ecommerce.users (email,password, role_id) values (:email, :password,1)");
         $stmt->bindParam(":email", $params["email"]);
         $stmt->bindParam(":password", $params["password"]);
         if ($stmt->execute()) {

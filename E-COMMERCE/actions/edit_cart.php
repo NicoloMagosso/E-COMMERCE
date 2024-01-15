@@ -15,7 +15,7 @@ if ($quantita > 0) {
     $params = ['product_id' => $product_id, 'quantita' => $quantita];
     $carrello->updateProduct($params);
 } else {
-    //Rimuovi il prodotto dal carrello
+    //Rimuove il prodotto dal carrello
     $carrello->removeProduct($product_id);
 }
 

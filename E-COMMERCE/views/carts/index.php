@@ -4,9 +4,15 @@ require '../../models/Classes.php';
 
 session_start();
 
+// Recupera l'utente corrente dalla sessione
 $current_user = $_SESSION['current_user'];
+
+// Recupera il carrello dell'utente
 $carrello = Cart::Find($current_user->GetID());
+
+// Recupera tutti i prodotti nel carrello
 $prodotti = $carrello->FetchAllProducts();
+
 ?>
 
 <html>
@@ -18,43 +24,47 @@ $prodotti = $carrello->FetchAllProducts();
 <body>
 
 <?php include '../navbar.php'; ?>
+
 <a href="../products/index.php">Vai ai prodotti</a>
+
 <?php if ($carrello) : ?>
     <h1>Carrello</h1>
     <ul>
-        <ul>
-            <?php foreach ($prodotti
-
-            as $productInCart) : ?>
+        <?php foreach ($prodotti as $productInCart) : ?>
             <?php if ($productInCart['quantita'] != 0) { ?>
-            <?php $prodotto = Product::Find($productInCart['product_id']); ?>
-            <li><?php echo $prodotto->getMarca(); ?></li>
-            <li><?php echo $prodotto->getNome(); ?></li>
-            <li><?php echo $prodotto->getPrezzo(); ?></li>
-            <li>Quantità: <?php echo $productInCart['quantita']; ?></li>
-            <li>Totale: <?php echo $productInCart['quantita'] * $prodotto->getPrezzo(); ?></li>
-        </ul>
+                <?php $prodotto = Product::Find($productInCart['product_id']); ?>
 
-        <form action="../../actions/edit_cart.php" method="POST">
-            <label for="quantita">Modifica quantità:</label>
-            <input type="number" name="quantita" value="<?php echo $productInCart['quantita']; ?>">
-            <input type="hidden" name="product_id" value="<?php echo $prodotto->getId(); ?>">
-            <input type="submit" name="update" value="Aggiorna quantità">
-        </form>
+                <!-- Dettagli del prodotto nel carrello -->
+                <ul>
+                    <li><?php echo $prodotto->getMarca(); ?></li>
+                    <li><?php echo $prodotto->getNome(); ?></li>
+                    <li><?php echo $prodotto->getPrezzo(); ?></li>
+                    <li>Quantità: <?php echo $productInCart['quantita']; ?></li>
+                    <li>Totale: <?php echo $productInCart['quantita'] * $prodotto->getPrezzo(); ?></li>
+                </ul>
 
+                <!-- Form per modificare la quantità nel carrello -->
+                <form action="../../actions/edit_cart.php" method="POST">
+                    <label for="quantita">Modifica quantità:</label>
+                    <input type="number" name="quantita" value="<?php echo $productInCart['quantita']; ?>">
+                    <input type="hidden" name="product_id" value="<?php echo $prodotto->getId(); ?>">
+                    <input type="submit" name="update" value="Aggiorna quantità">
+                </form>
 
-        <form action="../../actions/edit_cart.php" method="POST">
-            <input type="hidden" name="product_id" value="<?php echo $prodotto->getId(); ?>">
-            <input type="hidden" name="quantita" value="0">
-            <input type="submit" name="remove" value="Rimuovi dal carrello">
-        </form>
-        <hr>
-        <?php } ?>
+                <!-- Form per rimuovere il prodotto dal carrello -->
+                <form action="../../actions/edit_cart.php" method="POST">
+                    <input type="hidden" name="product_id" value="<?php echo $prodotto->getId(); ?>">
+                    <input type="hidden" name="quantita" value="0">
+                    <input type="submit" name="remove" value="Rimuovi dal carrello">
+                </form>
+
+                <hr>
+            <?php } ?>
         <?php endforeach; ?>
     </ul>
 
+    <!-- Totale del carrello e form per procedere all'acquisto -->
     <p>Totale carrello: <?php echo $carrello->getTotalPrice(); ?></p>
-
     <form action="../../actions/edit_cart.php" method="POST">
         <input type="number" name="quantita" value="<?php echo $carrello->getQuantita(); ?>">
         <input type="hidden" name="id" value="<?php echo $carrello->getId(); ?>">

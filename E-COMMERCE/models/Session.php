@@ -33,30 +33,6 @@ class Session
         $this->data_login = $data_login;
     }
 
-    public function Delete()
-    {
-
-        $pdo = self::Connect();
-        $id = self::getId();
-        $stmt = $pdo->prepare("delete from ecommerce.sessions where id = :id");
-        $stmt->bindParam(":id", $id);
-        if (!$stmt->execute()) {
-            throw new PDOException("errore di cancellazione del record di sessione richiesto");
-        }
-    }
-
-    public static function Find($id)
-    {
-        $pdo = self::Connect();
-        $stmt = $pdo->prepare("select * from ecommerce.sessions where id = :id");
-        $stmt->bindParam(":id", $id);
-        if ($stmt->execute()) {
-            return $stmt->fetchObject("Session");
-        } else {
-            return false;
-        }
-    }
-
     public static function Create($params)
     {
         $pdo = self::Connect();
@@ -69,7 +45,30 @@ class Session
             $stmt->execute();
             return $stmt->fetchObject("Session");
         } else {
-            throw new PDOException("Errore Nella Creazione");
+            throw new PDOException("Errore nella creazione!");
+        }
+    }
+
+    public function Delete()
+    {
+        $pdo = self::Connect();
+        $id = self::getId();
+        $stmt = $pdo->prepare("delete from ecommerce.sessions where id = :id");
+        $stmt->bindParam(":id", $id);
+        if (!$stmt->execute()) {
+            throw new PDOException("Errore nell'eliminazione del record di sessione!");
+        }
+    }
+
+    public static function Find($id)
+    {
+        $pdo = self::Connect();
+        $stmt = $pdo->prepare("select * from ecommerce.sessions where id = :id");
+        $stmt->bindParam(":id", $id);
+        if ($stmt->execute()) {
+            return $stmt->fetchObject("Session");
+        } else {
+            return false;
         }
     }
 

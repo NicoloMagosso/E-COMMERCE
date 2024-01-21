@@ -27,6 +27,8 @@
                 Se sei già iscritto <a href="../views/login.php" ;>clicca qui!</a>
             </p>
         </td>
+    </tr>
+</table>
 </body>
 
 </html>

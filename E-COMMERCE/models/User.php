@@ -70,7 +70,7 @@ class User
             $stmt->execute();
             return $stmt->fetchObject("User");
         } else {
-            throw new PDOException("Errore Nella Creazione");
+            throw new PDOException("Errore nella creazione!");
         }
     }
 

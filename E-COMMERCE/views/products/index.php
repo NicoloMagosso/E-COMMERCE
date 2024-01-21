@@ -5,6 +5,7 @@ require '../../models/classes.php';
 session_start();
 
 $products = Product::fetchAll();
+$user = $_SESSION['current_user'];
 ?>
 
 <html>
@@ -120,18 +121,22 @@ $products = Product::fetchAll();
         </form>
     </div>
 <?php } ?>
-
 <table>
-    <tr>
-        <td>
-            <div class="navbar">
+    <div class="navbar">
+        <tr>
+            <td>
                 <?php include '../navbar.php'; ?>
-            </div>
-        </td>
-        <td>
-            <a href="../carts/index.php">Vai al carrello</a>
-        </td>
-    </tr>
+            </td>
+
+        </tr>
+    </div>
+    <div>
+        <tr>
+            <td>
+                <a href="../carts/index.php">Vai al carrello</a>
+            </td>
+        </tr>
+    </div>
 </table>
 
 </body>

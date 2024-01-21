@@ -29,7 +29,7 @@ if (!$user) {
     $_SESSION['current_user'] = $user;
 
     //Crea un array con i parametri per la sessione e crea un oggetto Session
-    $params = array('ip' => $_SERVER["REMOTE_ADDR"], 'data_login' => date('d/m/y H:i'));
+    $params = array('ip' => $_SERVER["REMOTE_ADDR"], 'data_login' => date('d/m/y H:i'), 'user_id' => $user->getID());
     $_SESSION['object_session'] = Session::Create($params);
 
     header('location:../views/products/index.php');

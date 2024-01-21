@@ -23,7 +23,7 @@ $stmt = $pdo->prepare("SELECT id FROM ecommerce.users WHERE email = :email LIMIT
 $stmt->bindParam(":email", $email);
 $stmt->execute();
 
-//Recupera l'utente se presente
+//Cerca se l'utente è presente nel database
 $user = $stmt->fetchObject("User");
 
 //Se l'utente non esiste, procedi con la creazione del nuovo utente
@@ -31,7 +31,7 @@ if (!$user) {
     $params = ['email' => $email, 'password' => $password];
     $user = User::Create($params);
 
-    //Se la creazione dell'utente ha successo, crea anche un carrello associato
+    //Se la creazione dell'utente ha successo, crea un carrello associato ad esso
     if ($user) {
         Cart::Create($user->GetID());
 

@@ -19,6 +19,8 @@ create table if not exists ecommerce.sessions
     id int not null auto_increment primary key,
     ip varchar(16),
     data_login datetime,
+    data_logout datetime,
+    terminated tinyint,
     user_id int
 );
 

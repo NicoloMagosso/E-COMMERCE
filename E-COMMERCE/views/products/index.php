@@ -5,7 +5,15 @@ require '../../models/classes.php';
 session_start();
 
 $products = Product::fetchAll();
+
+if (!isset($_SESSION['current_user'])) {
+    http_response_code(401); // Set HTTP response code to 401 (Unauthorized)
+    echo "404 - Unauthorized Access";
+    exit;
+}
+
 $user = $_SESSION['current_user'];
+
 ?>
 
 <html>
@@ -28,7 +36,8 @@ $user = $_SESSION['current_user'];
                         <li><?php echo $product->getPrezzo() ?>$</li>
                     </ul>
 
-                    <form action="../../actions/add_to_cart.php" method="POST">
+                    <form action="../../actions/add_to_cart.php" method="POST"
+                          name="form<?php echo $product->getId(); ?>">
                         <input type="number" name="quantita" placeholder="0">
                         <input type="hidden" name="product_id" value="<?php echo $product->getId(); ?>">
                         <input type="submit" value="Aggiungi al carrello">

@@ -24,7 +24,7 @@
     <tr>
         <td>
             <p style="text-align: center; margin-top: 10px;">
-                <a>Non sei ancora iscritto <a href="../views/signup.php" ;>clicca qui!</a>
+                <a>Non sei ancora iscritto <a href="../views/signup.php">clicca qui!</a>
             </p>
         </td>
     </tr>

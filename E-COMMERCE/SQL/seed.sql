@@ -9,7 +9,7 @@ values ('shopper', 'utente base'),
        ('admin', 'utente privilegiato');
 
 insert into ecommerce.users(email, password, role_id)
-values ('todirascu@gmail.com', SHA2('password123', 256), 1),
-       ('pilotto@gmail.com', SHA2('qwerty456', 256), 1),
-       ('ghirardello@outlook.com', SHA2('letmein789', 256), 1),
-       ('alberto@libero.it', SHA2('pass1234', 256), 2);
+values ('franzolin@gmail.com', SHA2('123', 256), 1),
+       ('pilotto@gmail.com', SHA2('123', 256), 1),
+       ('ghirardello@outlook.com', SHA2('123', 256), 1),
+       ('admin@admin', SHA2('123', 256), 2);

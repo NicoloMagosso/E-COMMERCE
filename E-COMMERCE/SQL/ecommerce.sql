@@ -20,7 +20,7 @@ create table if not exists ecommerce.sessions
     ip varchar(16),
     data_login datetime,
     data_logout datetime,
-    terminated tinyint,
+    finished tinyint,
     user_id int
 );
 

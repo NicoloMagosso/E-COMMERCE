@@ -4,8 +4,8 @@ require '../../models/Classes.php';
 session_start();
 
 if (!isset($_SESSION['current_user'])) {
-    http_response_code(401); // Set HTTP response code to 401 (Unauthorized)
-    echo "404 - Unauthorized Access";
+    http_response_code(401);
+    echo "401 - Unauthorized Access";
     exit;
 }
 

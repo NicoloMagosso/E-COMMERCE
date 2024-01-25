@@ -46,7 +46,7 @@ $prodotti = $carrello->FetchAllProducts();
                 <!--MODIFICA QUANTITA-->
                 <form action="../../actions/edit_cart.php" method="POST">
                     <label for="quantita">Modifica quantità:</label>
-                    <input type="number" name="quantita" value="<?php echo $productInCart['quantita']; ?>">
+                    <input type="number" name="quantita" value="<?php echo $productInCart['quantita']; ?>" min = "1">
                     <input type="hidden" name="product_id" value="<?php echo $prodotto->getId(); ?>">
                     <input type="submit" name="update" value="Aggiorna quantità">
                 </form>

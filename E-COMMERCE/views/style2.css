@@ -98,3 +98,24 @@ a:hover {
 .navbar a:hover {
     background-color: #2980b9;
 }
+
+.admin-container {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-right: 800px;
+}
+
+.form-group {
+    margin-bottom: 10px; /* Puoi regolare questo valore secondo le tue preferenze */
+    display: flex;
+}
+
+.form-group label {
+    width: 80px;
+}
+
+.form-group input {
+    flex: 1;
+}

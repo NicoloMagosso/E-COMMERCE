@@ -38,7 +38,7 @@ $user = $_SESSION['current_user'];
 
                     <form action="../../actions/add_to_cart.php" method="POST"
                           name="form<?php echo $product->getId(); ?>">
-                        <input type="number" name="quantita" placeholder="0">
+                        <input type="number" name="quantita" placeholder="0" min = "1">
                         <input type="hidden" name="product_id" value="<?php echo $product->getId(); ?>">
                         <input type="submit" value="Aggiungi al carrello">
                     </form>

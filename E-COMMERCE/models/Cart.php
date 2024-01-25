@@ -38,13 +38,33 @@ class Cart
         $pdo = self::Connect();
         $cartId = $this->getId();
 
-        $stmt = $pdo->prepare("insert into ecommerce.cart_products (cart_id, product_id, quantita) values (:cart_id, :product_id, :quantita)");
-        $stmt->bindParam(':cart_id', $cartId);
-        $stmt->bindParam(':product_id', $params['product_id']);
-        $stmt->bindParam(':quantita', $params['quantita']);
+        // Controlla se il prodotto è già presente nel carrello
+        $stmtCheck = $pdo->prepare("SELECT * FROM ecommerce.cart_products WHERE cart_id = :cart_id AND product_id = :product_id");
+        $stmtCheck->bindParam(':cart_id', $cartId);
+        $stmtCheck->bindParam(':product_id', $params['product_id']);
+        $stmtCheck->execute();
+        $existingProduct = $stmtCheck->fetch(PDO::FETCH_ASSOC);
 
-        return $stmt->execute();
+        if ($existingProduct) {
+            // Se il prodotto è già nel carrello, aggiorna la quantità
+            $newQuantity = $existingProduct['quantita'] + $params['quantita'];
+            $stmtUpdate = $pdo->prepare("UPDATE ecommerce.cart_products SET quantita = :quantita WHERE cart_id = :cart_id AND product_id = :product_id");
+            $stmtUpdate->bindParam(':cart_id', $cartId);
+            $stmtUpdate->bindParam(':product_id', $params['product_id']);
+            $stmtUpdate->bindParam(':quantita', $newQuantity);
+
+            return $stmtUpdate->execute();
+        } else {
+            // Se il prodotto non è nel carrello, aggiungi una nuova riga
+            $stmtInsert = $pdo->prepare("INSERT INTO ecommerce.cart_products (cart_id, product_id, quantita) VALUES (:cart_id, :product_id, :quantita)");
+            $stmtInsert->bindParam(':cart_id', $cartId);
+            $stmtInsert->bindParam(':product_id', $params['product_id']);
+            $stmtInsert->bindParam(':quantita', $params['quantita']);
+
+            return $stmtInsert->execute();
+        }
     }
+
 
     //Aggiorna la quantità di un prodotto nel carrello
     public function updateProduct($params)

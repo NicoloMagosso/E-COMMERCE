@@ -30,17 +30,44 @@ if ($current_user->getRole_ID() != 2) {
 </head>
 <body>
 <h2>Crea Prodotto</h2>
-<form action="../../actions/add_product.php" method="POST">
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" required><br>
+<table>
+    <div class="admin-container">
+        <form action="../../actions/add_product.php" method="POST">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
 
-    <label for="prezzo">Prezzo:</label>
-    <input type="number" id="prezzo" name="prezzo" step="0.01" required><br>
+            <div class="form-group">
+                <label for="prezzo">Prezzo:</label>
+                <input type="number" id="prezzo" name="prezzo" min = "1" required>
+            </div>
 
-    <label for="marca">Marca:</label>
-    <input type="text" id="marca" name="marca" required><br>
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca" required>
+            </div>
 
-    <input type="submit" value="Crea Prodotto">
-</form>
+            <div>
+                <input type="submit" value="Crea Prodotto">
+            </div>
+        </form>
+
+    </div>
+</table>
+<h2>Elimina Prodotto</h2>
+<table>
+    <div class="admin-container">
+        <form action="../../actions/delete_product.php" method="POST">
+            <div class="form-group">
+                <label for="id">ID Prodotto:</label>
+                <input type="number" id="id" name="id" min = "1" required>
+            </div>
+            <div>
+                <input type="submit" value="Elimina Prodotto">
+            </div>
+        </form>
+    </div>
+</table>
 </body>
 </html>

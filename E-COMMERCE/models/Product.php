@@ -73,12 +73,23 @@ class Product
         }
     }
 
+    public function Delete()
+    {
+        if (!$this->id) {
+            return false;
+        }
+        $pdo = self::Connect();
+        $stmt = $pdo->prepare("delete from ecommerce.products where id=:id");
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        return true;
+    }
+
     public static function FetchAll()
     {
         $pdo = self::Connect();
         $stmt = $pdo->query("select * from ecommerce.products");
         return $stmt->fetchAll(PDO::FETCH_CLASS, 'Product');
-
     }
 
     public static function Connect()

@@ -12,11 +12,11 @@ if (!isset($_POST['id'])) {
 }
 
 //Ottieni l'ID del prodotto dalla richiesta POST
-$product_id = Product::Find($_POST['id']);
+$product = Product::Find($_POST['id']);
 
-//Elimina il prodotto utilizzando il metodo Delete della classe Product
-if ($product_id->delete($_POST)) {
-    echo "Prodotto eliminato con successo.";
+//Elimina il prodotto utilizzando il metodo Delete
+if ($product) {
+    $product->Delete();
     header('Location: ../views/admin/index.php');
 } else {
     http_response_code(500);

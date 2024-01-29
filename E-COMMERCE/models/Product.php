@@ -78,10 +78,18 @@ class Product
         if (!$this->id) {
             return false;
         }
+
+        //Elimina le righe correlate nella tabella cart_products
         $pdo = self::Connect();
-        $stmt = $pdo->prepare("delete from ecommerce.products where id=:id");
-        $stmt->bindParam(":id", $id);
+        $stmt = $pdo->prepare("delete from ecommerce.cart_products where product_id=:id");
+        $stmt->bindParam(":id", $this->id);
         $stmt->execute();
+
+        //Elimina il prodotto dalla tabella products
+        $stmt = $pdo->prepare("delete from ecommerce.products where id=:id");
+        $stmt->bindParam(":id", $this->id);
+        $stmt->execute();
+
         return true;
     }
 
